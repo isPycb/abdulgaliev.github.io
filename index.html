@@ -883,66 +883,6 @@
                 mainContent.style.display = 'block';
                 mainContent.classList.add('show-content');
             });
-
-            // Обработчик формы Telegram
-            document.getElementById('telegram-form').addEventListener('submit', function(e) {
-                e.preventDefault();
-                
-                // Замените эти значения на свои
-                const BOT_TOKEN = '8273770299:AAHqxL2f5ZanQiXqlmPA9ALyOeZmm1O2XlQ';
-                const CHAT_ID = '972616076';
-                
-                const form = e.target;
-                const formData = new FormData(form);
-                
-                // Форматируем сообщение
-                let message = `📩 Новое сообщение с сайта:\n\n`;
-                message += `👤 Имя: ${formData.get('name')}\n`;
-                message += `📧 Email: ${formData.get('email')}\n`;
-                message += `📝 Сообщение:\n${formData.get('message')}`;
-                
-                // Отправляем в Telegram
-                fetch(`https://api.telegram.org/bot${BOT_TOKEN}/sendMessage`, {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                    },
-                    body: JSON.stringify({
-                        chat_id: CHAT_ID,
-                        text: message,
-                        parse_mode: 'HTML'
-                    })
-                })
-                .then(response => response.json())
-                .then(data => {
-                    showThankYouPage();
-                    form.reset();
-                })
-                .catch(error => {
-                    console.error('Error:', error);
-                    alert('Произошла ошибка при отправке. Пожалуйста, попробуйте позже.');
-                });
-            });
-
-            // Функции для страницы благодарности
-            function showThankYouPage() {
-                const thankYouPage = document.getElementById('thank-you-page');
-                thankYouPage.classList.add('active');
-                document.body.style.overflow = 'hidden';
-            }
-
-            function hideThankYouPage() {
-                const thankYouPage = document.getElementById('thank-you-page');
-                thankYouPage.classList.remove('active');
-                document.body.style.overflow = '';
-                window.scrollTo({
-                    top: document.getElementById('contact').offsetTop,
-                    behavior: 'smooth'
-                });
-            }
-        });
-    </script>
-    <script>
     // ... (остальной код остается без изменений) ...
 
     // Функции для страницы благодарности
@@ -950,9 +890,6 @@
         const thankYouPage = document.getElementById('thank-you-page');
         thankYouPage.classList.add('active');
         document.body.style.overflow = 'hidden';
-        
-        // Сохраняем позицию прокрутки перед показом страницы благодарности
-        window.scrollPositionBeforeThankYou = window.scrollY;
     }
 
     function hideThankYouPage() {
@@ -960,9 +897,9 @@
         thankYouPage.classList.remove('active');
         document.body.style.overflow = '';
         
-        // Возвращаемся к сохраненной позиции прокрутки
+        // Прокрутка в начало страницы
         window.scrollTo({
-            top: window.scrollPositionBeforeThankYou || 0,
+            top: 0,
             behavior: 'smooth'
         });
     }
@@ -970,6 +907,11 @@
     // Обработчик формы Telegram
     document.getElementById('telegram-form').addEventListener('submit', function(e) {
         e.preventDefault();
+        
+        // Защита от повторной отправки
+        const submitBtn = e.target.querySelector('button[type="submit"]');
+        submitBtn.disabled = true;
+        submitBtn.textContent = 'Отправка...';
         
         const BOT_TOKEN = '8273770299:AAHqxL2f5ZanQiXqlmPA9ALyOeZmm1O2XlQ';
         const CHAT_ID = '972616076';
@@ -997,12 +939,23 @@
         .then(data => {
             showThankYouPage();
             form.reset();
+            
+            // Восстановление кнопки после успешной отправки
+            setTimeout(() => {
+                submitBtn.disabled = false;
+                submitBtn.textContent = 'Отправить сообщение';
+            }, 2000);
         })
         .catch(error => {
             console.error('Error:', error);
             alert('Произошла ошибка при отправке. Пожалуйста, попробуйте позже.');
+            
+            // Восстановление кнопки при ошибке
+            submitBtn.disabled = false;
+            submitBtn.textContent = 'Отправить сообщение';
         });
     });
 </script>
+            
 </body>
 </html>
