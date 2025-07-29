@@ -948,12 +948,7 @@ document.getElementById('telegram-form').addEventListener('submit', function(e) 
     })
   })
   .then(response => response.json())
-  .then(data => {
-    // Показываем страницу благодарности
-    document.getElementById('telegram-form').style.display = 'none';
-    document.getElementById('thank-you-page').style.display = 'flex';
-    document.getElementById('contact').scrollIntoView({ behavior: 'smooth' });
-    
+  .then(data => {    
     // Очищаем форму
     form.reset();
   })
