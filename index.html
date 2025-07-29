@@ -786,7 +786,7 @@
         <!-- Контакты -->
         <section id="contact" class="section">
   <div class="container">
-    <h2 class="section-title">Свяжитесь со мной</h2>
+    <h2 class="section-title" id = "connectwithme">Свяжитесь со мной</h2>
     <form id="telegram-form" class="contact-form">
       <div class="form-group">
         <input type="text" name="name" class="form-control" placeholder="Ваше имя" required>
@@ -886,5 +886,50 @@
             });
         });
     </script>
+    <script>
+document.getElementById('telegram-form').addEventListener('submit', function(e) {
+  e.preventDefault();
+  
+  // Замените эти значения на свои
+  const BOT_TOKEN = '8273770299:AAHqxL2f5ZanQiXqlmPA9ALyOeZmm1O2XlQ';
+  const CHAT_ID = '972616076';
+  
+  const form = e.target;
+  const formData = new FormData(form);
+  
+  // Форматируем сообщение
+  let message = `📩 Новое сообщение с сайта:\n\n`;
+  message += `👤 Имя: ${formData.get('name')}\n`;
+  message += `📧 Email: ${formData.get('email')}\n`;
+  message += `📝 Сообщение:\n${formData.get('message')}`;
+  
+  // Отправляем в Telegram
+  fetch(`https://api.telegram.org/bot${BOT_TOKEN}/sendMessage`, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({
+      chat_id: CHAT_ID,
+      text: message,
+      parse_mode: 'HTML'
+    })
+  })
+  .then(response => response.json())
+  .then(data => {
+    // Показываем страницу благодарности
+    document.getElementById('telegram-form').style.display = 'none';
+    document.getElementById('thank-you-page').style.display = 'flex';
+    document.getElementById('contact').scrollIntoView({ behavior: 'smooth' });
+    
+    // Очищаем форму
+    form.reset();
+  })
+  .catch(error => {
+    console.error('Error:', error);
+    alert('Произошла ошибка при отправке. Пожалуйста, попробуйте позже.');
+  });
+});
+</script>
 </body>
 </html>
