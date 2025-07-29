@@ -243,12 +243,12 @@
             max-width: 600px;
         }
 
-	.podtekst{
-	    font-size: 1.0rem;
-	    color: var(--gray);
-	    margin-bottom: 2rem;
+        .podtekst {
+            font-size: 1.0rem;
+            color: var(--gray);
+            margin-bottom: 2rem;
             max-width: 600px;
-	}
+        }
 
         .social-links {
             display: flex;
@@ -469,13 +469,6 @@
             margin-bottom: 1.5rem;
         }
 
-        .form-label {
-            display: block;
-            margin-bottom: 0.5rem;
-            font-size: 0.875rem;
-            color: var(--gray);
-        }
-
         .form-control {
             width: 100%;
             padding: 0.75rem 1rem;
@@ -496,34 +489,40 @@
             min-height: 150px;
             resize: vertical;
         }
-	.contact-form {
-	max-width: 600px;
-	margin: 0 auto;
-	background: rgba(255, 255, 255, 0.08);
-	border: 1px solid rgba(255, 255, 255, 0.1);
-	border-radius: 0.75rem;
-	padding: 2rem;
-	backdrop-filter: blur(10px);
-	}
 
-	.form-group {
-	margin-bottom: 1.5rem;
-	}
+        /* Страница благодарности */
+        .thank-you-page {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(15, 23, 42, 0.95);
+            backdrop-filter: blur(10px);
+            z-index: 2000;
+            display: none;
+            justify-content: center;
+            align-items: center;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
 
-	.form-control {
-	width: 100%;
-	padding: 0.75rem 1rem;
-	background: rgba(15, 23, 42, 0.7);
-	border: 1px solid rgba(255, 255, 255, 0.1);
-	border-radius: 0.375rem;
-	color: white;
-	font-family: 'Inter', sans-serif;
-	}
+        .thank-you-page.active {
+            display: flex;
+            opacity: 1;
+        }
 
-	textarea.form-control {
-  	min-height: 150px;
-  	resize: vertical;
-	}
+        .thank-you-content {
+            text-align: center;
+            max-width: 500px;
+            padding: 2rem;
+            animation: fadeIn 0.5s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
 
         /* Футер */
         .footer {
@@ -531,38 +530,6 @@
             padding: 3rem 0;
             border-top: 1px solid var(--glass-border);
         }
-	.thank-you-page {
-	position: fixed;
-	top: 0;
-	left: 0;
-	width: 100%;
-	height: 100%;
-	background: rgba(15, 23, 42, 0.95);
-	backdrop-filter: blur(10px);
-	z-index: 1000;
-	display: none;
-	justify-content: center;
-	align-items: center;
-	opacity: 0;
-	transition: opacity 0.3s ease;
-	}
-
-	.thank-you-page.active {
-	display: flex;
-	opacity: 1;
-	}
-
-	.thank-you-content {
-	text-align: center;
-	max-width: 500px;
-	padding: 2rem;
-	animation: fadeIn 0.5s ease;
-	}
-
-	@keyframes fadeIn {
-	from { opacity: 0; transform: translateY(20px); }
-	to { opacity: 1; transform: translateY(0); }
-	}
 
         /* Анимации */
         @keyframes float {
@@ -633,7 +600,7 @@
                         <a href="#"><i class="fab fa-telegram"></i></a>
                         <a href="#"><i class="fab fa-twitter"></i></a>
                     </div>
-		    <p class = "podtekst">они не работют, свои контактные данные не оставляю</p>
+                    <p class="podtekst">они не работют, свои контактные данные не оставляю</p>
                 </div>
             </div>
         </header>
@@ -647,7 +614,7 @@
                         <p>Привет! Я Frontend-разработчик с 5-летним опытом создания современных веб-приложений. Специализируюсь на разработке сложных SPA-приложений с использованием React и TypeScript.</p>
                         <p>Моя философия - создавать не просто функциональные продукты, а продуманные цифровые решения, которые решают реальные проблемы пользователей. Я убежден, что баланс между эстетикой, юзабилити и производительностью - ключ к успешному продукту.</p>
                         <p>В своей работе я уделяю особое внимание мелочам, что позволяет мне создавать чупа-чупсы.</p>
-			<a href="#connectwithme" class="btn" style="margin-top: 1rem;">Связаться со мной</a>
+                        <a href="#connectwithme" class="btn" style="margin-top: 1rem;">Связаться со мной</a>
                     </div>
                     <div class="about-image">
                         <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71" alt="Рабочее место">
@@ -817,31 +784,31 @@
 
         <!-- Контакты -->
         <section id="contact" class="section">
-  <div class="container">
-    <h2 class="section-title" id = "connectwithme">Свяжитесь со мной</h2>
-    <form id="telegram-form" class="contact-form">
-      <div class="form-group">
-        <input type="text" name="name" class="form-control" placeholder="Ваше имя" required>
-      </div>
-      <div class="form-group">
-        <input type="email" name="email" class="form-control" placeholder="Ваш email" required>
-      </div>
-      <div class="form-group">
-        <textarea name="message" class="form-control" placeholder="Ваше сообщение" required></textarea>
-      </div>
-      <button type="submit" class="btn">Отправить сообщение</button>
-    </form>
-  </div>
-</section>
+            <div class="container">
+                <h2 class="section-title" id="connectwithme">Свяжитесь со мной</h2>
+                <form id="telegram-form" class="contact-form">
+                    <div class="form-group">
+                        <input type="text" name="name" class="form-control" placeholder="Ваше имя" required>
+                    </div>
+                    <div class="form-group">
+                        <input type="email" name="email" class="form-control" placeholder="Ваш email" required>
+                    </div>
+                    <div class="form-group">
+                        <textarea name="message" class="form-control" placeholder="Ваше сообщение" required></textarea>
+                    </div>
+                    <button type="submit" class="btn">Отправить сообщение</button>
+                </form>
+            </div>
+        </section>
 
-<!-- Страница благодарности (изначально скрыта) -->
-<div id="thank-you-page" class="thank-you-page">
-  <div class="thank-you-content">
-    <h2>Спасибо!</h2>
-    <p>Мы обязательно с вами свяжемся.</p>
-    <button onclick="hideThankYouPage()" class="btn">Вернуться назад</button>
-  </div>
-</div>
+        <!-- Страница благодарности -->
+        <div id="thank-you-page" class="thank-you-page">
+            <div class="thank-you-content">
+                <h2>Спасибо!</h2>
+                <p>Мы обязательно с вами свяжемся.</p>
+                <button onclick="hideThankYouPage()" class="btn">Вернуться назад</button>
+            </div>
+        </div>
 
         <!-- Футер -->
         <footer class="footer">
@@ -916,69 +883,64 @@
                 mainContent.style.display = 'block';
                 mainContent.classList.add('show-content');
             });
+
+            // Обработчик формы Telegram
+            document.getElementById('telegram-form').addEventListener('submit', function(e) {
+                e.preventDefault();
+                
+                // Замените эти значения на свои
+                const BOT_TOKEN = '8273770299:AAHqxL2f5ZanQiXqlmPA9ALyOeZmm1O2XlQ';
+                const CHAT_ID = '972616076';
+                
+                const form = e.target;
+                const formData = new FormData(form);
+                
+                // Форматируем сообщение
+                let message = `📩 Новое сообщение с сайта:\n\n`;
+                message += `👤 Имя: ${formData.get('name')}\n`;
+                message += `📧 Email: ${formData.get('email')}\n`;
+                message += `📝 Сообщение:\n${formData.get('message')}`;
+                
+                // Отправляем в Telegram
+                fetch(`https://api.telegram.org/bot${BOT_TOKEN}/sendMessage`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        chat_id: CHAT_ID,
+                        text: message,
+                        parse_mode: 'HTML'
+                    })
+                })
+                .then(response => response.json())
+                .then(data => {
+                    showThankYouPage();
+                    form.reset();
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                    alert('Произошла ошибка при отправке. Пожалуйста, попробуйте позже.');
+                });
+            });
+
+            // Функции для страницы благодарности
+            function showThankYouPage() {
+                const thankYouPage = document.getElementById('thank-you-page');
+                thankYouPage.classList.add('active');
+                document.body.style.overflow = 'hidden';
+            }
+
+            function hideThankYouPage() {
+                const thankYouPage = document.getElementById('thank-you-page');
+                thankYouPage.classList.remove('active');
+                document.body.style.overflow = '';
+                window.scrollTo({
+                    top: document.getElementById('contact').offsetTop,
+                    behavior: 'smooth'
+                });
+            }
         });
     </script>
-    <script>
-document.getElementById('telegram-form').addEventListener('submit', function(e) {
-  e.preventDefault();
-  
-  // Замените эти значения на свои
-  const BOT_TOKEN = '8273770299:AAHqxL2f5ZanQiXqlmPA9ALyOeZmm1O2XlQ';
-  const CHAT_ID = '972616076';
-  
-  const form = e.target;
-  const formData = new FormData(form);
-  
-  // Форматируем сообщение
-  let message = `📩 Новое сообщение с сайта:\n\n`;
-  message += `👤 Имя: ${formData.get('name')}\n`;
-  message += `📧 Email: ${formData.get('email')}\n`;
-  message += `📝 Сообщение:\n${formData.get('message')}`;
-  
-  // Отправляем в Telegram
-  fetch(`https://api.telegram.org/bot${BOT_TOKEN}/sendMessage`, {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-    },
-    body: JSON.stringify({
-      chat_id: CHAT_ID,
-      text: message,
-      parse_mode: 'HTML'
-    })
-  })
-  .then(response => response.json())
-  .then(data => {    
-    // Очищаем форму
-    form.reset();
-  })
-  .catch(error => {
-    console.error('Error:', error);
-    alert('Произошла ошибка при отправке. Пожалуйста, попробуйте позже.');
-  });
-});
- function showThankYouPage() {
-  const thankYouPage = document.getElementById('thank-you-page');
-  thankYouPage.classList.add('active');
-  document.body.style.overflow = 'hidden'; // Блокируем прокрутку основной страницы
-}
-
-function hideThankYouPage() {
-  const thankYouPage = document.getElementById('thank-you-page');
-  thankYouPage.classList.remove('active');
-  document.body.style.overflow = ''; // Восстанавливаем прокрутку
-  window.scrollTo({
-    top: document.getElementById('contact').offsetTop,
-    behavior: 'smooth'
-  });
-}
-
-// В обработчике формы заменяем старый код на:
-.then(data => {
-  showThankYouPage();
-  form.reset();
-})
-</script>
-	
 </body>
 </html>
