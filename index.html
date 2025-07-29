@@ -942,5 +942,67 @@
             }
         });
     </script>
+    <script>
+    // ... (остальной код остается без изменений) ...
+
+    // Функции для страницы благодарности
+    function showThankYouPage() {
+        const thankYouPage = document.getElementById('thank-you-page');
+        thankYouPage.classList.add('active');
+        document.body.style.overflow = 'hidden';
+        
+        // Сохраняем позицию прокрутки перед показом страницы благодарности
+        window.scrollPositionBeforeThankYou = window.scrollY;
+    }
+
+    function hideThankYouPage() {
+        const thankYouPage = document.getElementById('thank-you-page');
+        thankYouPage.classList.remove('active');
+        document.body.style.overflow = '';
+        
+        // Возвращаемся к сохраненной позиции прокрутки
+        window.scrollTo({
+            top: window.scrollPositionBeforeThankYou || 0,
+            behavior: 'smooth'
+        });
+    }
+
+    // Обработчик формы Telegram
+    document.getElementById('telegram-form').addEventListener('submit', function(e) {
+        e.preventDefault();
+        
+        const BOT_TOKEN = '8273770299:AAHqxL2f5ZanQiXqlmPA9ALyOeZmm1O2XlQ';
+        const CHAT_ID = '972616076';
+        
+        const form = e.target;
+        const formData = new FormData(form);
+        
+        let message = `📩 Новое сообщение с сайта:\n\n`;
+        message += `👤 Имя: ${formData.get('name')}\n`;
+        message += `📧 Email: ${formData.get('email')}\n`;
+        message += `📝 Сообщение:\n${formData.get('message')}`;
+        
+        fetch(`https://api.telegram.org/bot${BOT_TOKEN}/sendMessage`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                chat_id: CHAT_ID,
+                text: message,
+                parse_mode: 'HTML'
+            })
+        })
+        .then(response => response.json())
+        .then(data => {
+            showThankYouPage();
+            form.reset();
+        })
+        .catch(error => {
+            console.error('Error:', error);
+            alert('Произошла ошибка при отправке. Пожалуйста, попробуйте позже.');
+        });
+    });
+</script>
 </body>
 </html>
